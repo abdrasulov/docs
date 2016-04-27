@@ -1,9 +1,9 @@
 ActiveAdmin.register Document do
   config.filters = false
   belongs_to :folder
-  actions :all, except: [:show, :edit, :update]
+  actions :all, except: [:show]
 
-  permit_params :name, :file
+  permit_params :name, :file, :folder_id
 
   index do
     column :name do |doc|
@@ -11,6 +11,7 @@ ActiveAdmin.register Document do
     end
     actions defaults: false do |doc|
       item fa_icon('download'), doc.file.url, class: 'member_link'
+      item fa_icon('edit'), edit_admin_folder_document_path(doc.folder, doc), class: 'member_link'
       item fa_icon('trash'), admin_folder_document_path(doc.folder, doc), method: :delete, class: 'member_link'
     end
 
@@ -19,7 +20,11 @@ ActiveAdmin.register Document do
   form do |f|
     f.semantic_errors
     f.inputs do
-      f.input :file, as: :file
+      if f.object.new_record?
+        f.input :file, as: :file
+      else
+        f.input :folder
+      end
     end
     f.actions
   end
