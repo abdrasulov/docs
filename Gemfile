@@ -26,3 +26,5 @@ group :development do
 end
 gem 'activeadmin', github: 'activeadmin'
 gem 'devise'
+gem 'font-awesome-rails'
+gem 'paperclip', '~> 5.0.0.beta1'
