@@ -11,8 +11,8 @@ ActiveAdmin.register Document do
     end
     actions defaults: false do |doc|
       item fa_icon('download'), doc.file.url, class: 'member_link'
-      item fa_icon('edit'), edit_admin_folder_document_path(doc.folder, doc), class: 'member_link'
-      item fa_icon('trash'), admin_folder_document_path(doc.folder, doc), method: :delete, class: 'member_link'
+      item fa_icon('edit'), edit_folder_document_path(doc.folder, doc), class: 'member_link'
+      item fa_icon('trash'), folder_document_path(doc.folder, doc), method: :delete, class: 'member_link'
     end
 
   end
